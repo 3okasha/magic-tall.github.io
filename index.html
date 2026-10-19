@@ -45,10 +45,6 @@ html{scroll-behavior:smooth;}
 
 body{
   background-color:var(--bg);
-  background-image:linear-gradient(color-mix(in srgb,var(--bg) 76%,transparent),color-mix(in srgb,var(--bg) 76%,transparent)),url('file_000000007dd0824384e2713f6d50466b.png');
-  background-position:center;
-  background-size:cover;
-  background-attachment:fixed;
   color:var(--text);
   font-family:'IBM Plex Sans Arabic',sans-serif;
   line-height:1.7;
@@ -69,6 +65,18 @@ a{color:inherit;text-decoration:none;}
   border:0;
 }
 
+ .topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:16px;
+  padding:7px 6%;
+  background:#101012;
+  color:#d0d0d2;
+  border-bottom:1px solid #2c2c2f;
+  font-size:.78rem;
+}
+.topbar a{color:#fff;direction:ltr;font-family:'IBM Plex Mono',monospace;}
 header{
   position:sticky;
   top:0;
@@ -76,9 +84,9 @@ header{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:14px 6%;
-  background:var(--bg);
-  backdrop-filter:blur(10px);
+  padding:12px 6%;
+  background:color-mix(in srgb,var(--bg) 94%,transparent);
+  backdrop-filter:blur(14px);
   border-bottom:1px solid var(--border);
 }
 
@@ -141,32 +149,87 @@ nav a.navlink:hover{color:var(--text);}
 .fb-btn{background:var(--facebook);}
 .fb-btn:hover{background:var(--facebook-hover);}
 
-.hero{
-  min-height:88vh;
-  display:flex;
-  flex-direction:column;
+ .hero{
+  position:relative;
+  isolation:isolate;
+  min-height:min(760px,calc(100svh - 105px));
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(230px,.55fr);
   align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:60px 6% 50px;
+  gap:clamp(30px,7vw,100px);
+  text-align:right;
+  padding:88px 9%;
+  overflow:hidden;
+  background:#18201f url('file_000000007dd0824384e2713f6d50466b.png') center 48%/cover no-repeat;
 }
-
+.hero::before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  inset:0;
+  background:linear-gradient(270deg,rgba(5,9,13,.93) 0%,rgba(5,9,13,.79) 38%,rgba(5,9,13,.28) 100%),linear-gradient(0deg,rgba(5,9,13,.75),transparent 48%,rgba(5,9,13,.18));
+}
+.hero-content{max-width:700px;}
+.hero-kicker{
+  display:inline-flex;
+  align-items:center;
+  gap:11px;
+  margin-bottom:24px;
+  color:#f3c5a5;
+  font-size:.9rem;
+  font-weight:600;
+  letter-spacing:.04em;
+}
+.hero-kicker::before{content:"";width:34px;height:1px;background:var(--red);}
 .hero-logo{
-  font-size:clamp(3.5rem,10vw,6rem);
+  max-width:740px;
+  font-size:clamp(3.5rem,7.2vw,6.6rem);
   font-weight:700;
-  line-height:1.1;
-  margin-bottom:8px;
+  line-height:1.18;
+  margin-bottom:20px;
+  color:#fff;
+  text-shadow:0 5px 28px rgba(0,0,0,.4);
 }
-
-.hero-logo span{color:var(--red);}
-
+.hero-logo span{color:#f4b79d;}
 .hero .subtitle{
-  max-width:480px;
-  font-size:1.1rem;
-  color:var(--muted);
-  margin:6px 0;
+  max-width:590px;
+  font-size:clamp(1rem,1.7vw,1.2rem);
+  color:rgba(255,255,255,.82);
+  margin:8px 0;
   font-weight:400;
 }
+.hero-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.hero .cta{background:var(--red);border-color:var(--red);color:#fff;padding:14px 28px;box-shadow:0 12px 28px rgba(226,35,26,.25);}
+.hero .cta:hover{background:var(--red-hover);border-color:var(--red-hover);}
+.hero-secondary{display:inline-flex;align-items:center;gap:9px;padding:12px 8px;color:#fff;font-weight:500;}
+.hero-secondary span{color:#52dc83;font-size:1.2rem;}
+.hero-proof{
+  justify-self:center;
+  align-self:end;
+  width:min(100%,290px);
+  margin-bottom:18px;
+  padding:22px 24px;
+  border:1px solid rgba(255,255,255,.28);
+  background:rgba(14,18,19,.46);
+  backdrop-filter:blur(12px);
+  box-shadow:0 20px 55px rgba(0,0,0,.24);
+}
+.hero-proof-label{display:block;color:rgba(255,255,255,.65);font-size:.8rem;}
+.hero-proof strong{display:block;margin:5px 0 10px;color:#fff;font-size:1.45rem;}
+.hero-proof p{color:rgba(255,255,255,.75);font-size:.88rem;}
+.hero-proof-mark{display:flex;align-items:center;gap:10px;margin-bottom:14px;color:#f3c5a5;font:500 .72rem 'IBM Plex Mono',monospace;letter-spacing:.14em;direction:ltr;}
+.hero-proof-mark::before{content:"";width:24px;height:1px;background:var(--red);}
+.hero .typewriter-line{min-height:1.6em;margin:18px 0 25px;color:#f3c5a5;font-size:1.08rem;}
+
+@media(max-width:700px){
+  .hero{grid-template-columns:1fr;gap:26px;min-height:auto;padding:78px 7% 58px;background-position:58% center;}
+  .hero::before{background:linear-gradient(270deg,rgba(5,9,13,.91),rgba(5,9,13,.67)),linear-gradient(0deg,rgba(5,9,13,.76),transparent 80%);}
+  .hero-content{max-width:620px;}
+  .hero-logo{font-size:clamp(3rem,11vw,5rem);}
+  .hero-proof{justify-self:start;align-self:auto;width:min(100%,360px);margin:0;padding:17px 20px;}
+  .hero-proof-mark{margin-bottom:8px;}
+}
+
 
 .typewriter-line{
   min-height:1.6em;
@@ -263,10 +326,90 @@ section{padding:88px 6%;}
   font-size:.95rem;
 }
 
+.services-showcase{max-width:1120px;margin:0 auto;}
+.services-heading{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:30px;}
+.services-heading .section-title{margin:0;font-size:clamp(2.2rem,6vw,4.5rem);line-height:1.05;}
+.services-heading .section-title span{display:block;color:var(--red);font-size:.42em;letter-spacing:.18em;direction:ltr;text-align:right;margin-bottom:12px;}
+.services-heading .section-lede{max-width:390px;margin:0;}
+.service-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;}
+.service-card{padding:0;overflow:hidden;border-radius:3px;}
+.service-visual{height:250px;position:relative;overflow:hidden;background:linear-gradient(140deg,#78949a,#264859 65%,#12222b);}
+.service-visual:before{content:"";position:absolute;inset:13% 20% 0;border:8px solid rgba(11,20,26,.88);border-bottom:0;background:linear-gradient(90deg,transparent 48%,rgba(11,20,26,.85) 48%,rgba(11,20,26,.85) 52%,transparent 52%),linear-gradient(0deg,transparent 48%,rgba(11,20,26,.85) 48%,rgba(11,20,26,.85) 52%,transparent 52%),linear-gradient(135deg,rgba(223,242,235,.65),rgba(46,111,131,.2));}
+.service-visual:after{content:"MAGIC TALL · ALUMINUM & UPVC";position:absolute;bottom:14px;right:18px;color:#fff;font:500 .68rem/1.4 'IBM Plex Mono',monospace;letter-spacing:.1em;}
+.service-visual.install{background:linear-gradient(140deg,#927c68,#344b57 65%,#17242a);}
+.service-visual.install:before{inset:10% 13% 0 28%;transform:perspective(380px) rotateY(-8deg);background:linear-gradient(90deg,transparent 47%,rgba(11,20,26,.85) 47%,rgba(11,20,26,.85) 51%,transparent 51%),linear-gradient(0deg,transparent 48%,rgba(11,20,26,.85) 48%,rgba(11,20,26,.85) 52%,transparent 52%),linear-gradient(135deg,rgba(237,222,194,.5),rgba(69,123,138,.2));}
+.service-visual.repair{background:linear-gradient(140deg,#667c76,#263e48 65%,#12222b);}
+.service-visual.repair:before{inset:15% 28% 0 15%;border-radius:48% 48% 0 0;}
+.service-card-content{padding:24px 26px 27px;}
+.service-card-content h3{font-size:1.25rem;margin-bottom:8px;}
+.service-card-content p{color:var(--muted);font-size:.94rem;}
+
 .materials-note b{
   color:var(--red);
   font-weight:500;
 }
+
+.blog-section{
+  max-width:1080px;
+  margin:0 auto;
+}
+
+.blog-feature{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  min-height:340px;
+  margin-top:34px;
+  overflow:hidden;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:12px;
+}
+
+.blog-art{
+  position:relative;
+  min-height:320px;
+  overflow:hidden;
+  background:linear-gradient(145deg,#78939a,#263f4b 62%,#111b20);
+}
+
+.blog-art:before{
+  content:"";
+  position:absolute;
+  inset:12% 18% 0;
+  border:10px solid rgba(15,20,23,.88);
+  border-bottom:0;
+  background:linear-gradient(90deg,transparent 48%,rgba(15,20,23,.82) 48%,rgba(15,20,23,.82) 52%,transparent 52%),linear-gradient(0deg,transparent 48%,rgba(15,20,23,.82) 48%,rgba(15,20,23,.82) 52%,transparent 52%),linear-gradient(135deg,rgba(222,239,231,.62),rgba(37,105,125,.24));
+  box-shadow:0 20px 50px rgba(0,0,0,.3);
+}
+
+.blog-art:after{
+  content:"MAGIC TALL · DESIGN NOTES";
+  position:absolute;
+  right:22px;
+  bottom:18px;
+  color:#fff;
+  font:500 .72rem/1.4 'IBM Plex Mono',monospace;
+  letter-spacing:.12em;
+}
+
+.blog-copy{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:flex-start;
+  padding:clamp(26px,5vw,54px);
+}
+
+.blog-tag{color:var(--red);font-size:.86rem;font-weight:600;}
+.blog-copy h3{font-size:clamp(1.45rem,3vw,2.15rem);line-height:1.45;margin:10px 0;}
+.blog-copy p,.blog-card p{color:var(--muted);}
+.blog-read{display:inline-flex;align-items:center;gap:10px;margin-top:22px;color:var(--text);font-weight:600;}
+.blog-read span{color:var(--red);font-size:1.25rem;}
+.blog-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:20px;}
+.blog-card{padding:24px;background:var(--surface);border:1px solid var(--border);border-radius:10px;transition:transform .2s,border-color .2s;}
+.blog-card:hover{transform:translateY(-4px);border-color:var(--red);}
+.blog-card .blog-tag{font-size:.78rem;}
+.blog-card h3{font-size:1.08rem;line-height:1.5;margin:8px 0;}
 
 .credit-band{
   position:relative;
@@ -361,6 +504,7 @@ footer b{
 }
 
 @media(max-width:600px){
+  .topbar{padding:6px 5%;font-size:.68rem;gap:8px;}
   header{padding:12px 5%;}
 
   nav a.navlink{display:none;}
@@ -373,9 +517,17 @@ footer b{
 
   section{padding:60px 6%;}
 
+  .blog-feature{grid-template-columns:1fr;}
+  .blog-art{min-height:220px;}
+  .blog-grid{grid-template-columns:1fr;}
+
   .hero-logo{
     font-size:clamp(2.8rem,12vw,4rem);
   }
+
+  .services-heading{align-items:flex-start;flex-direction:column;}
+  .service-grid{grid-template-columns:1fr;}
+  .service-visual{height:210px;}
 }
 
 /* Subtle entrance motion keeps the original layout intact. */
@@ -468,11 +620,17 @@ footer{animation:fade-up .7s ease both;}
 
 <body>
 
+<div class="topbar">
+  <span>حلول الألوميتال والـ UPVC · تصنيع وتركيب حسب المقاس</span>
+  <a href="https://wa.me/201203480661">012 03480661</a>
+</div>
+
 <header>
   <div class="logo-text">Magic <span>Tall</span></div>
 
   <nav>
     <a class="navlink" href="#services">خدماتنا</a>
+    <a class="navlink" href="blog.html">المدونة</a>
     <a class="navlink" href="#contact">تواصل</a>
 
     <button class="theme-toggle" id="theme-toggle" type="button" aria-label="تفعيل الوضع الفاتح" aria-pressed="false" title="تفعيل الوضع الفاتح">☀</button>
@@ -488,71 +646,101 @@ footer{animation:fade-up .7s ease both;}
 </header>
 
 <section class="hero">
-  <h1 class="sr-only">Magic Tall - أنظمة الألومنيوم</h1>
-
-  <div class="hero-logo">Magic <span>Tall</span></div>
-
-  <p class="subtitle">
-    عالم من الأناقة والخيال. Magic Tall مش مجرد اسم.
-  </p>
-
-  <p class="typewriter-line">
-    <span class="typewriter" id="typewriter"></span>
-  </p>
-
-  <a class="cta" href="blog.html">اكتشف المزيد</a>
+  <div class="hero-content">
+    <p class="hero-kicker">MAGIC TALL <span>·</span> تفاصيل تصنع فرقًا</p>
+    <h1 class="hero-logo">نوافذ وأبواب<br><span>تليق ببيتك</span></h1>
+    <p class="subtitle">
+      نصنع ونركّب الألوميتال والـ UPVC بعناية في كل تفصيلة، من اختيار الخامة حتى التسليم.
+    </p>
+    <p class="typewriter-line">
+      <span class="typewriter" id="typewriter"></span>
+    </p>
+    <div class="hero-actions">
+      <a class="cta" href="blog.html">اكتشف المدونة <span aria-hidden="true">←</span></a>
+      <a class="hero-secondary" href="https://wa.me/201203480661"><span aria-hidden="true">●</span> استشارة واتساب</a>
+    </div>
+  </div>
+  <aside class="hero-proof" aria-label="معلومات عن خدمات Magic Tall">
+    <span class="hero-proof-mark">DESIGN · DETAIL · DURABILITY</span>
+    <span class="hero-proof-label">حلول مصممة على مقاسك</span>
+    <strong>من الفكرة للتسليم</strong>
+    <p>تصنيع وتركيب باهتمام بالتفاصيل وجودة تدوم.</p>
+  </aside>
 </section>
 
 <section class="services" id="services">
-  <h2 class="section-title">خدماتنا</h2>
-
-  <p class="section-lede">
-    شغل الألوميتال والـ UPVC من الفكرة للتسليم، بعناية في كل خطوة.
-  </p>
-
-  <div class="service-grid">
-    <div class="service-card">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-        <rect x="3" y="3" width="18" height="18" rx="2"/>
-        <path d="M3 9h18M9 21V9"/>
-      </svg>
-
-      <h3>تصنيع</h3>
-
-      <p>
-        نصنّع وحدات الألوميتال والـ UPVC بمقاسات مظبوطة على حسب كل مساحة،
-        من الرسمة للمنتج الجاهز.
-      </p>
+  <div class="services-showcase">
+    <div class="services-heading">
+      <h2 class="section-title"><span>SERVICE</span>خدماتنا</h2>
+      <p class="section-lede">شغل الألوميتال والـ UPVC من الفكرة للتسليم، بعناية في كل خطوة.</p>
     </div>
 
-    <div class="service-card">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-        <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.1-3.1a4 4 0 01-5.4 5.4L6.5 20.5a2.1 2.1 0 01-3-3L12.4 8.6a4 4 0 015.4-5.4l-3.1 3.1z"/>
-      </svg>
+    <div class="service-grid">
+      <article class="service-card">
+        <div class="service-visual" role="img" aria-label="نافذة ألوميتال عصرية"></div>
+        <div class="service-card-content">
+          <h3>تصنيع حسب المقاس</h3>
+          <p>نصنّع وحدات الألوميتال والـ UPVC على حسب كل مساحة، من الرسمة للمنتج الجاهز.</p>
+        </div>
+      </article>
 
-      <h3>فك</h3>
+      <article class="service-card">
+        <div class="service-visual install" role="img" aria-label="تركيب نافذة في منزل عصري"></div>
+        <div class="service-card-content">
+          <h3>فك وتركيب باحتراف</h3>
+          <p>نفك القديم بعناية ونركّب الجديد بدقة وعزل مناسب، مع الحفاظ على التشطيب وتسليم المكان نضيف.</p>
+        </div>
+      </article>
 
-      <p>
-        بنفك القديم بعناية، من غير أي ضرر في الحيطة أو التشطيب حواليه.
-      </p>
+      <article class="service-card">
+        <div class="service-visual repair" role="img" aria-label="تفاصيل إطار نافذة متين"></div>
+        <div class="service-card-content">
+          <h3>حلول ألوميتال وUPVC</h3>
+          <p>شبابيك وأبواب بتصميم عملي وخامات مناسبة لاحتياج بيتك ومساحتك.</p>
+        </div>
+      </article>
     </div>
 
-    <div class="service-card">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-        <path d="M20 6L9 17l-5-5"/>
-      </svg>
-
-      <h3>تركيب</h3>
-
-      <p>
-        تركيب دقيق وعزل صح، وتسليم نضيف من غير فوضى ولا مخلفات.
-      </p>
-    </div>
+    <p class="materials-note">
+      بنشتغل بـ<b>الألوميتال</b> و<b>UPVC</b> - زي الشبابيك والأبواب وغيرها، بأي مقاس.
+    </p>
   </div>
+</section>
 
-  <p class="materials-note">
-    بنشتغل بـ<b>الألوميتال</b> و<b>UPVC</b> - زي الشبابيك والأبواب وغيرها، بأي مقاس.
-  </p>
+<section class="blog-section" id="blog" aria-labelledby="blog-title">
+  <p class="section-title" id="blog-title">من مدونة Magic Tall</p>
+  <p class="section-lede">أفكار ونصائح عملية تساعدك تختار وتنفّذ بثقة.</p>
+
+  <article class="blog-feature">
+    <div class="blog-art" role="img" aria-label="نافذة عصرية بإضاءة طبيعية"></div>
+    <div class="blog-copy">
+      <span class="blog-tag">دليل الاختيار · ٦ دقائق</span>
+      <h3>الألوميتال أم UPVC؟ اختار الخامة المناسبة لبيتك</h3>
+      <p>قارن بين العزل والمتانة والصيانة، واعرف إيه الأنسب لمساحتك واحتياجاتك قبل ما تبدأ.</p>
+      <a class="blog-read" href="https://wa.me/201203480661">اسألنا عن الاختيار <span aria-hidden="true">←</span></a>
+    </div>
+  </article>
+
+  <div class="blog-grid">
+    <article class="blog-card">
+      <span class="blog-tag">دليل الاختيار</span>
+      <h3>إزاي تختار شباك مناسب لبيتك؟</h3>
+      <p>المقاس، اتجاه الفتح والإضاءة؛ تفاصيل صغيرة تصنع فرقًا كبيرًا.</p>
+      <a class="blog-read" href="https://wa.me/201203480661">اعرف أكتر <span aria-hidden="true">←</span></a>
+    </article>
+    <article class="blog-card">
+      <span class="blog-tag">التصميم</span>
+      <h3>اختيار لون الإطار المناسب للديكور</h3>
+      <p>نصائح بسيطة لتنسيق لون الإطار مع الواجهات والأثاث.</p>
+      <a class="blog-read" href="https://wa.me/201203480661">ناقش تصميمك معنا <span aria-hidden="true">←</span></a>
+    </article>
+    <article class="blog-card">
+      <span class="blog-tag">العناية والصيانة</span>
+      <h3>خطوات تحافظ على شبابيكك</h3>
+      <p>عادات سهلة للتنظيف والاستخدام تساعد في الحفاظ على الأداء.</p>
+      <a class="blog-read" href="https://wa.me/201203480661">اسأل عن الصيانة <span aria-hidden="true">←</span></a>
+    </article>
+  </div>
 </section>
 
 <div class="credit-band">
